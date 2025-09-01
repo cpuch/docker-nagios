@@ -4,6 +4,7 @@
 if [ -f .env ]; then
     source .env
 else
+    echo "Using .env.example as fallback"
     source .env.example
 fi
 
