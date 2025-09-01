@@ -13,7 +13,7 @@ A production-ready Nagios monitoring solution packaged in Docker with NRPE and N
 
 ## 🚀 Quick Start
 
-### Using Pre-built Image
+### Docker Run
 
 ```bash
 docker run -d \
@@ -23,11 +23,69 @@ docker run -d \
     cpuchalver/nagios:latest
 ```
 
+### Docker Compose
+
+```yaml
+services:
+  nagios:
+    image: cpuchalver/nagios:latest
+    ports:
+      - "8080:80"
+      - "5667:5667"
+```
+
 ### Access Web Interface
 
 - **URL**: http://localhost:8080
 - **Default Username**: `nagiosadmin`
 - **Default Password**: `nagios`
+
+## 💾 Persistent Data
+
+To persist Nagios data across container restarts, mount the following volumes:
+
+### Important Directories
+
+| Directory | Purpose | Recommended Mount |
+|-----------|---------|-------------------|
+| `/opt/nagios/var` | Logs, status files, retention data | `nagios_var:/opt/nagios/var` |
+| `/opt/nagios/etc` | Configuration files | `nagios_etc:/opt/nagios/etc` |
+| `/opt/nagios/libexec` | Custom plugins | `nagios_libexec:/opt/nagios/libexec` |
+
+### Docker Run with Persistence
+
+```bash
+docker run -d \
+    --name nagios \
+    -p 8080:80 \
+    -p 5667:5667 \
+    -v nagios_var:/opt/nagios/var \
+    -v nagios_etc:/opt/nagios/etc \
+    -v nagios_libexec:/opt/nagios/libexec \
+    cpuchalver/nagios:latest
+```
+
+### Docker Compose with Persistence
+
+```yaml
+services:
+  nagios:
+    image: cpuchalver/nagios:latest
+    ports:
+      - "8080:80"
+      - "5667:5667"
+    volumes:
+      - nagios_var:/opt/nagios/var
+      - nagios_etc:/opt/nagios/etc
+      - nagios_libexec:/opt/nagios/libexec
+
+volumes:
+  nagios_var:
+  nagios_etc:
+  nagios_libexec:
+```
+
+**⚠️ Note**: Without persistent volumes, all configuration changes and historical data will be lost when the container is removed.
 
 ## 🪛 Build from source
 
