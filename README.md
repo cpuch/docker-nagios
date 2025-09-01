@@ -18,16 +18,16 @@ A production-ready Nagios monitoring solution packaged in Docker with NRPE and N
 ```bash
 docker run -d \
     --name nagios \
-    -p 80:80 \
+    -p 8080:80 \
     -p 5667:5667 \
     cpuchalver/nagios:latest
 ```
 
 ### Access Web Interface
 
-- **URL**: http://localhost
+- **URL**: http://localhost:8080
 - **Default Username**: `nagiosadmin`
-- **Default Password**: `nagios` (⚠️ **Change immediately in production!**)
+- **Default Password**: `nagios`
 
 ## 🪛 Build from source
 
@@ -42,9 +42,9 @@ cd docker-nagios
 
 ```bash
 cp .env.example .env
-# Edit .env with your credentials
-nano .env
 ```
+
+**⚠️ Make sure to edit .env with your credentials in production!**
 
 ### Build image
 
