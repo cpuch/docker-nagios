@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Export env variables
+# Export environment variables
 if [ -f .env ]; then
     source .env
 else
