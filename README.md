@@ -127,7 +127,7 @@ docker run -d \
 
 ## 🧪 Testing
 
-Install test  dependencies (Ubuntu/Debian)
+Install test dependencies (Ubuntu/Debian)
 
 ```bash
 sudo apt install bats bats-assert bats-support
