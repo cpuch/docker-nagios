@@ -26,15 +26,10 @@ jobs:
 
     - name: Build test image
       run: |
-        env
         chmod +x scripts/run_build.sh
-        scripts/run_build.sh
+        scripts/run_build.sh --load
 
     - name: Run tests
-      env:
-        NAGIOSADMIN_PASSWORD: ${{ env.NAGIOSADMIN_PASSWORD }}
-        NSCA_PASSWORD: ${{ env.NSCA_PASSWORD }}
       run: |
-        env
         chmod +x scripts/run_tests.sh
         scripts/run_tests.sh
