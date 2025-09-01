@@ -1,0 +1,6 @@
+services:
+  nagios:
+    image: cpuchalver/nagios:latest
+    ports:
+      - "8080:80"
+      - "5667:5667"
